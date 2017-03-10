@@ -1,0 +1,5 @@
+if active_time and total_fare then Z1
+
+if fare and waiting_time then Z2
+
+if fare and waiting_time and active_time and total_fare then Z3
