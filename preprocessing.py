@@ -18,24 +18,34 @@ print(data['fare_rate'].mean())
 
 data['reward'] =abs(data['fare_rate'] - data['fare_rate'].mean())- abs(data['fare_rate_e'] - data['fare_rate'].mean())
 
-#data['mean'] = data['fare_rate'].mean()
+data['error0'] = data['fare_rate'] - data['fare_rate'].mean()
 
-#data[['fare_rate_e','fare_rate' ,'reward','mean']].plot()
-#plt.show()
+data['error1'] = data['fare_rate_e'] - data['fare_rate'].mean()
 
 
-data['ua'] = 1 /(1 + 2.7**(-0.5*((data['active_time'] -data['active_time'].mean())/(data['active_time'].std()))))
 
-data['uc'] = 1 /(1 + 2.7**(-0.5*((data['waiting_time'] -data['waiting_time'].mean())/(data['waiting_time'].std()))))
+data ['PID1'] =  0.1*data['error1']  + ((data['error1']-data['error0'])/data['time'])*100 +0.1* (data['error1']*data['time'] + 0.1*data['error0']*data['active_time'])
 
-data['ub'] = 1 /(1 + 2.7**(-0.5*((data['total_fare'] -data['total_fare'].mean())/(data['total_fare'].std()))))
+data['PID0'] = 0.1*data['error0'] + (data['error0']/data['active_time'])*100 + data['error0']*data['active_time']*0.1
 
-data['ud'] = 1 /(1 + 2.7**(-0.5*((data['fare'] -data['fare'].mean())/(data['fare'].std()))))
+data['mean'] = data['fare_rate'].mean()
 
-data[['ua','ub','uc','ud','reward']].plot()
+data['Diff'] =  abs(data['PID0']) - abs(data['PID1'])
 
-data[['ua','ub','uc','ud','reward']].to_csv("fuzzyq.csv")
+
+data[['PID0','PID1','Diff']].plot()
+
 plt.show()
+
+
+data['ua'] = 1 /(1 + 2.7**(1*((data['active_time'] -data['active_time'].mean())/(data['active_time'].std()))))
+data['uc'] = 1 /(1 + 2.7**(1*((data['waiting_time'] -data['waiting_time'].mean())/(data['waiting_time'].std()))))
+data['ub'] = 1 /(1 + 2.7**(-1*((data['total_fare'] -data['total_fare'].mean())/(data['total_fare'].std()))))
+data['ud'] = 1 /(1 + 2.7**(-1*((data['fare'] -data['fare'].mean())/(data['fare'].std()))))
+#data[['ua','ub','uc','ud','reward']].plot()
+
+data[['ua','ub','uc','ud','Diff']].to_csv("fuzzyq.csv")
+
 
 
 

@@ -3,26 +3,27 @@ import pandas as pd
 import os
 import pandas as pd
 import numpy as np
+
 def taxi_eligibility(taxi,alpha ,Gamma):
     n_membership = 4
-
+    y = tf.placeholder("float",[None , 2])
     x = tf.placeholder("float", [None, n_membership])
     reward = tf.placeholder("float" ,[None , 1])
 
     rule3 = x
-
+    rule4 = y
     rule1, rule2 = tf.split(x,[2,2],1)
 
     w1 = tf.reduce_prod(rule1 , axis = 1,keep_dims=True)
     w2 = tf.reduce_prod(rule2 , axis = 1,keep_dims=True)
     w3 = tf.reduce_prod(rule3 , axis = 1,keep_dims=True)
+    w4 = tf.reduce_prod(rule4 ,axis=1 , keep_dims=True)
+    w =  tf.add_n([w1,w2,w3,w4])
 
-    w =  tf.add_n([w1,w2,w3])
-
-    w_inputs = tf.concat([w1,w2,w3] , axis =1)
+    w_inputs = tf.concat([w1,w2,w3,w4] , axis =1)
     w_inputs_ = tf.div(w_inputs , w)
 
-    z= tf.Variable(tf.random_normal([3,1]))
+    z= tf.Variable(tf.random_normal([4,1]))
 
 
     Q = tf.matmul(w_inputs_,z)
@@ -43,11 +44,12 @@ def taxi_eligibility(taxi,alpha ,Gamma):
 
     data = pd.read_csv("fuzzyq.csv")
     taxis = data[["ua","ub","uc","ud"]].as_matrix()
-    r = (data['reward']*100).as_matrix()[:,np.newaxis]
+    r = (data['Diff']*10).as_matrix()[:,np.newaxis]
+    y_in = data[["ub","ud"]].as_matrix()
 
     if os.path.exists("checkpoint")!=True:
-        for i in range(0,1000):
-           sess.run([optimizer ], feed_dict={x: taxis ,reward:r})
+        for i in range(0,10000):
+           sess.run([optimizer ], feed_dict={x: taxis ,reward:r , y : y_in})
 
         save_path = saver.save(sess, "./")
     else :
@@ -56,7 +58,7 @@ def taxi_eligibility(taxi,alpha ,Gamma):
 
     taxi_in = np.array(taxi)
 
-    return sess.run(Q, feed_dict={x: taxi_in})
+    return sess.run(Q, feed_dict={x: taxi_in, y:y_in})
 
 if __name__=="__main__" :
     E = taxi_eligibility([[0.4216668178867803,0.32799309442505115,0.7501831501831502,0.8334689890932769]])
