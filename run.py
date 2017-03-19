@@ -5,11 +5,11 @@ import matplotlib.pyplot as plt
 
 data = pd.read_csv("fuzzyq.csv")
 taxis = data[["ua","ub","uc","ud"]].as_matrix()
-E = anfis.taxi_eligibility(taxis , alpha= 3 ,Gamma = 0.3)
+E = anfis.taxi_eligibility(taxis , alpha= 0.1 ,Gamma = 0.7)
 print(E.max())
 data['Q'] = E.ravel()
-data['reward'] =data['reward']*10
-data[['reward' ,'Q']].plot()
+data['Diff'] =data['Diff']*15
+data[['Diff' ,'Q']].plot()
 plt.show()
 
 
