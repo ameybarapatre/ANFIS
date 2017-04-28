@@ -1,5 +1,5 @@
 # ANFIS
-ANFIS Q Learning
+Fuzzy Q learning in Tensorflow  , Training an ANFIS.
 
 # Dataset.py
 It creates all possible combinations of waiting time , active time , total fare and ride fare and stores it in dataset.csv
