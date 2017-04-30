@@ -6,7 +6,7 @@ import numpy as np
 
 def taxi_eligibility(taxi,taxis_y ,alpha ,Gamma):
     n_membership = 4
-    y = tf.placeholder("float",[None , 2])
+    y = tf.placeholder("float",[None , 3])
     x = tf.placeholder("float", [None, n_membership])
     reward = tf.placeholder("float" ,[None , 1])
 
@@ -42,11 +42,10 @@ def taxi_eligibility(taxi,taxis_y ,alpha ,Gamma):
     sess.run(init)
     saver = tf.train.Saver()
 
-    data = pd.read_csv("fuzzyq.csv")
+    data = pd.read_csv("fuzzyq1.csv")
     taxis = data[["ua","ub","uc","ud"]].as_matrix()
     r = (data['Diff']*10).as_matrix()[:,np.newaxis]
-    y_in = data[["ub","ud"]].as_matrix()
-
+    y_in = data[["ub","ud","ua"]].as_matrix()
     if os.path.exists("checkpoint")!=True:
         for i in range(0,10000):
            sess.run([optimizer ], feed_dict={x: taxis ,reward:r , y : y_in})

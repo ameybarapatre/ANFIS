@@ -1,10 +1,11 @@
-if active_time and total_fare then Z1
+if active_time_high and total_fare_low then Z1
 
-if fare and waiting_time then Z2
+if fare_high and waiting_time_low then Z2
 
-if fare and waiting_time and active_time and total_fare then Z3
+if fare_high and waiting_time_low and active_time_high and total_fare_low then Z3
 
-if fare and total_fare then Z4
+if fare_high and total_fare_low and active_time_high then Z4
+
 
 Title : DQN for Taxi Fleet Management
 
