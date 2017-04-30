@@ -32,12 +32,12 @@ data['mean'] = data['fare_rate'].mean()
 
 data['Diff'] =  abs(data['PID0']) - abs(data['PID1'])
 
+data['reward'] =data['reward']*10
 
-data[['PID0','PID1','Diff']].plot()
+data[['reward','Diff']].plot()
 
 plt.show()
-
-
+"""
 data['ua'] = 1 /(1 + 2.7**(1*((data['active_time'] -data['active_time'].mean())/(data['active_time'].std()))))
 data['uc'] = 1 /(1 + 2.7**(1*((data['waiting_time'] -data['waiting_time'].mean())/(data['waiting_time'].std()))))
 data['ub'] = 1 /(1 + 2.7**(-1*((data['total_fare'] -data['total_fare'].mean())/(data['total_fare'].std()))))
@@ -45,7 +45,7 @@ data['ud'] = 1 /(1 + 2.7**(-1*((data['fare'] -data['fare'].mean())/(data['fare']
 #data[['ua','ub','uc','ud','reward']].plot()
 
 data[['ua','ub','uc','ud','Diff']].to_csv("fuzzyq.csv")
-
+"""
 
 
 

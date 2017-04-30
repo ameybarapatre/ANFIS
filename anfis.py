@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import numpy as np
 
-def taxi_eligibility(taxi,alpha ,Gamma):
+def taxi_eligibility(taxi,taxis_y ,alpha ,Gamma):
     n_membership = 4
     y = tf.placeholder("float",[None , 2])
     x = tf.placeholder("float", [None, n_membership])
@@ -58,7 +58,7 @@ def taxi_eligibility(taxi,alpha ,Gamma):
 
     taxi_in = np.array(taxi)
 
-    return sess.run(Q, feed_dict={x: taxi_in, y:y_in})
+    return sess.run(Q, feed_dict={x: taxi_in, y:taxis_y})
 
 if __name__=="__main__" :
     E = taxi_eligibility([[0.4216668178867803,0.32799309442505115,0.7501831501831502,0.8334689890932769]])
