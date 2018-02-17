@@ -7,6 +7,8 @@ A adaptive-neuro fuzzy network is created with rules with antecedents like  user
 expected ride fare and total fare collected by the taxi . The network is trained using Q learning a reinforcement
 learning method . The  output of the trained network is the Q factor for each possible taxi that can server a request.
 
+### Find the Decision Tree based prediction https://github.com/nirbhayph/Fleet-Management-System/tree/master/python/dtreg
+
 ## Reward Function :
 Any reinforcement learning algorithm is based around maximizing the total reward at the end of an episode of actions.
 The aim of the model is to ensure that rate of total fare per unit time of every taxi must converge on to its average
