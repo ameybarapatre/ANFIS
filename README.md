@@ -5,7 +5,7 @@
 Proposal : To create a Deep Q learning Network to help dictate taxi allotment to user request.
 A adaptive-neuro fuzzy network is created with rules with antecedents like  user's waiting time , taxi's active time ,
 expected ride fare and total fare collected by the taxi . The network is trained using Q learning a reinforcement
-learning method . The  output of the trained network is the Q factor for each possible taxi that can server a request.
+learning method . The  output of the trained network is the Q factor for each possible taxi that can serve a request.
 
 ### Find the Decision Tree based prediction https://github.com/nirbhayph/Fleet-Management-System/tree/master/python/dtreg
 
