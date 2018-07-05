@@ -33,7 +33,7 @@ It creates all possible combinations of waiting time , active time , total fare 
 It creates the ANFIS network uses reinforcement learning algorithm Q Learning and stores the trained network.
 
 ## Preprocessing.py 
-It generates fuzzy membership fucntions and calculates reward values using PID for each combination in the dataset.csv
+It generates fuzzy membership functions and calculates reward values using PID for each combination in the dataset.csv
 
 ### Fuzzy rules:
 
